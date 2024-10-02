@@ -5,4 +5,4 @@ app = FastAPI()
 
 @app.get("/")
 def get_hello():
-    return "hello fastAPI"
+    return {"string": "hello fastAPI"}
