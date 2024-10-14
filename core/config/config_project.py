@@ -5,11 +5,7 @@ from pydantic_settings import BaseSettings
 load_dotenv()
 
 
-class AccessTokenConfig(BaseModel):
-    lifetime_seconds: int = 3600
-
-
-class Settings(BaseSettings):
+class EnvVariables(BaseModel):
     DB_USER: str
     DB_PASS: int
     DB_HOST: str
@@ -20,6 +16,12 @@ class Settings(BaseSettings):
         env_file = ".env"
 
 
+class AccessTokenConfig(BaseModel):
+    lifetime_seconds: int = 3600
+
+
+class Settings(BaseSettings):
+    env: EnvVariables = EnvVariables()
     access_token: AccessTokenConfig = AccessTokenConfig()
 
 
