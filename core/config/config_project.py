@@ -1,7 +1,13 @@
 from dotenv import load_dotenv
+from pydantic import BaseModel
 from pydantic_settings import BaseSettings
 
 load_dotenv()
+
+
+class AccessTokenConfig(BaseModel):
+    lifetime_seconds: int = 3600
+
 
 class Settings(BaseSettings):
     DB_USER: str
@@ -12,6 +18,9 @@ class Settings(BaseSettings):
 
     class Config:
         env_file = ".env"
+
+
+    access_token: AccessTokenConfig = AccessTokenConfig()
 
 
 settings = Settings()
