@@ -1,12 +1,16 @@
+from datetime import date
+
+from fastapi_users.db import SQLAlchemyBaseUserTable, SQLAlchemyUserDatabase
 from sqlalchemy.orm import Mapped, mapped_column
-from app.config.database import Base, int_pk
+from sqlalchemy.ext.asyncio import AsyncSession
+from sqlalchemy import Date
+
+from core.config.database import Base
 
 
-class UsersORM(Base):
-    __tablename__ = "user"
+class User(Base, SQLAlchemyBaseUserTable[int]):
+    birthday: Mapped[date] = mapped_column(Date, nullable=False)
 
-    id: Mapped[int_pk]
-    username: Mapped[str] = mapped_column(nullable=False)
-    password: Mapped[bytes] = mapped_column(nullable=False)
-    email: Mapped[str] = mapped_column(nullable=True)
-    active: Mapped[bool] = True
+    @classmethod
+    def get_db(cls, session: AsyncSession):
+        return SQLAlchemyUserDatabase(session, User)
