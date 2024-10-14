@@ -4,7 +4,7 @@ from app.dependencies.authentication.fastapi_users import fastapi_users
 from app.schemas.user_schemas import UserRead, UserCreate
 
 register_router = APIRouter(
-    prefix="/register",
+    prefix="/auth",
     tags=["Registration"]
 )
 
