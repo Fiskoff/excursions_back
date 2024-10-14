@@ -1,10 +1,16 @@
 from fastapi import FastAPI
-from app.router.user_router import router as user_router
+from fastapi import APIRouter
+
+from app.router.auth_router import auth_router
+
 
 app = FastAPI()
 
-app.include_router(user_router)
-
+router = APIRouter(
+    prefix="/excursions",
+    tags=["Excursions"]
+)
+router.include_router(auth_router)
 
 if __name__ == "__main__":
     import uvicorn
