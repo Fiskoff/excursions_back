@@ -5,12 +5,15 @@ from pydantic_settings import BaseSettings
 load_dotenv()
 
 
-class EnvVariables(BaseModel):
+class EnvVariables(BaseSettings):
     DB_USER: str
     DB_PASS: int
     DB_HOST: str
     DB_PORT: int
     DB_NAME: str
+
+    reset_password_token_secret: str
+    verification_token_secret: str
 
     class Config:
         env_file = ".env"
