@@ -1,13 +1,14 @@
+from datetime import date
 from fastapi_users import schemas
 
 
 class UserRead(schemas.BaseUser[int]):
-    pass
+    birthday: date
 
 
 class UserCreate(schemas.BaseUserCreate):
-    pass
+    birthday: date
 
 
 class UserUpdate(schemas.BaseUserUpdate):
-    pass
+    birthday: date
