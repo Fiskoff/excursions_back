@@ -1,26 +1,13 @@
-from fastapi import APIRouter, HTTPException, Depends
-from sqlalchemy.ext.asyncio import AsyncSession
+from fastapi import APIRouter
 
-from app.services.user_services import UserService
-from app.config.database import async_session_maker
+from app.dependencies.authentication.fastapi_users import fastapi_users
+from app.schemas.user_schemas import UserRead, UserUpdate
 
-router = APIRouter(
-    prefix="/register",
-    tags=["Register User"]
+user_router = APIRouter(
+    prefix="/user",
+    tags=["Users"]
 )
 
-
-async def get_db() -> AsyncSession:
-    async with async_session_maker() as session:
-        yield session
-
-@router.post("/")
-async def register(username: str, password: str, email: str = None, db: AsyncSession = Depends(get_db)):
-    user_service = UserService(db)
-    try:
-        await user_service.register_user(username, password, email)
-        return {"message": "Пользователь успешно зарегистрирован"}
-    except ValueError as e:
-        raise HTTPException(status_code=400, detail=str(e))
-    except Exception:
-        raise HTTPException(status_code=500, detail="Ошибка при регистрации пользователя")
+user_router.include_router(
+    router=fastapi_users.get_users_router(UserRead, UserUpdate),
+)
