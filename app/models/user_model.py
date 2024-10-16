@@ -5,7 +5,7 @@ from sqlalchemy.orm import Mapped, mapped_column
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy import Date
 
-from core.config.database import Base
+from core.config.database_helper import Base
 
 
 class User(Base, SQLAlchemyBaseUserTable[int]):

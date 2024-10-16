@@ -11,7 +11,7 @@ DATABASE_URL = (f"postgresql+asyncpg://"
 
 
 class Base(DeclarativeBase):
-    id: Mapped[int] = mapped_column(primary_key=True)
+    id: Mapped[int] = mapped_column(primary_key=True, autoincrement=True)
 
 
 class DatabaseHelper:

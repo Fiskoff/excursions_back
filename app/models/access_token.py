@@ -3,7 +3,7 @@ from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy.orm import Mapped, mapped_column
 from sqlalchemy import Integer, ForeignKey
 
-from core.config.database import Base
+from core.config.database_helper import Base
 
 
 class AccessToken(Base, SQLAlchemyBaseAccessTokenTable[int]):

@@ -3,8 +3,9 @@ from sqlalchemy import engine_from_config
 from sqlalchemy import pool
 from alembic import context
 
-from app.config.database import Base, DATABASE_URL
-from app.models.user_model import UsersORM
+from core.config.database_helper import Base, DATABASE_URL
+from app.models.user_model import User
+from app.models.access_token import AccessToken
 
 config = context.config
 
