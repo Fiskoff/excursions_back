@@ -2,9 +2,11 @@ from fastapi import FastAPI, Depends
 from fastapi import APIRouter
 from fastapi.security import HTTPBearer
 
+from core.config.config_project import settings
 from app.router.auth_router import auth_router
 from app.router.register_router import register_router
 from app.router.user_router import user_router
+from app.router.reset_password_router import reset_password_router
 
 
 app = FastAPI()
@@ -17,6 +19,7 @@ main_router = APIRouter(
 main_router.include_router(auth_router)
 main_router.include_router(register_router)
 main_router.include_router(user_router)
+main_router.include_router(reset_password_router)
 
 
 app.include_router(main_router)
@@ -24,4 +27,4 @@ app.include_router(main_router)
 
 if __name__ == "__main__":
     import uvicorn
-    uvicorn.run(app, host="127.0.0.1", port=8000)
+    uvicorn.run(app, host=settings.env.SERVER_HOST, port=settings.env.SERVER_PORT)
