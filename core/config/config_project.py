@@ -12,6 +12,9 @@ class EnvVariables(BaseSettings):
     DB_PORT: int
     DB_NAME: str
 
+    SERVER_HOST: str
+    SERVER_PORT: int
+
     reset_password_token_secret: str
     verification_token_secret: str
 
